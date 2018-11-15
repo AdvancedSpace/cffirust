@@ -1,9 +1,6 @@
 #include <math.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
 #include <time.h>
 
 double norm(const double vector[]) {
