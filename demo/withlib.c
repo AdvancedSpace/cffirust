@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-extern double norm(const double vector[], const uint vsize);
-extern void subv(const double A[], const double B[], double C[],
-                 const uint vsize);
+#ifdef USE_RUST_LIB
+#include "rustlinalg.h"
+#else
+#include "clinalg.h"
+#endif
 
 int main() {
   time_t t;
