@@ -7,9 +7,14 @@ use std::slice;
 pub unsafe extern "C" fn norm(vector: *const c_double, length: c_int) -> c_double {
     assert!(!vector.is_null(), "provided vector is null");
 
-    let rvec: &[c_double] = slice::from_raw_parts(vector, length as usize);
-    let sum: f64 = rvec.into_iter().sum();
-    sum.sqrt()
+    let ulen = length as usize;
+
+    let rvec: &[c_double] = slice::from_raw_parts(vector, ulen);
+    let mut rtn = 0.0;
+    for i in 0..ulen {
+        rtn += rvec[i] * rvec[i];
+    }
+    rtn.sqrt()
 }
 
 #[no_mangle]
