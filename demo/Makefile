@@ -13,9 +13,9 @@ clib:
 	rm clib.o libclinalg.so
 
 rustlib:
-	rustc rustlinalg.rs --crate-type cdylib -C opt-level=3
+	rustc rustlinalg.rs --crate-type=cdylib -C opt-level=3 -C target-cpu=native
 	ls -lh librustlinalg.so
-	gcc rustlib.c -o rustlib.o -L. -lrustlinalg
+	gcc rustlib.c -o rustlib.o -L. -lrustlinalg -O3
 	ls -lh rustlib.o
 	LD_LIBRARY_PATH=. /usr/bin/time ./rustlib.o
 	rm rustlib.o librustlinalg.so
