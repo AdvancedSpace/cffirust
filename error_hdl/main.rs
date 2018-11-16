@@ -15,11 +15,11 @@ fn main() {
     // NOTE: All variables are read-only unless specified otherwise.
     let num_tms = 2;
     // All variables MUST be initialized -- in this case we set it to zero.
-    let mut read_tm_storage = vec![0.0; num_tms];
+    let mut read_tm_storage = Vec::with_capacity(num_tms);
 
     match read_tm1() {
         Ok(tm_value) => {
-            read_tm_storage[0] = tm_value;
+            read_tm_storage.push(tm_value);
             println!("TM #1: no error -- value = {}", tm_value);
         }
         Err(_) => {
@@ -29,7 +29,7 @@ fn main() {
 
     match read_tm2() {
         Ok(tm_value) => {
-            read_tm_storage[1] = tm_value;
+            read_tm_storage.push(tm_value);
             println!("TM #2: no error -- value = {}", tm_value);
         }
         Err(_) => {
@@ -39,6 +39,6 @@ fn main() {
 
     println!("\nTo recap, all telemetry to be downlinked includes:");
     for (pos, val) in read_tm_storage.iter().enumerate() {
-        println!("TM #{} = {}", pos, val);
+        println!("Valid TM #{} = {}", pos + 1, val);
     }
 }
