@@ -13,8 +13,8 @@ int main() {
   srand((unsigned)time(&t));
 
   /*
-    Generate 100 million vectors of size 3, sub two adjacent generations
-    compute the norm, print the total of norms, and return.
+    Generate 2 vectors of size 3, compute the norm of their difference,
+    repeat 50 million times, print the total of norms, and return.
    */
   uint i;
   double totals = 0; // Avoids optimizing out the loop.
@@ -26,5 +26,5 @@ int main() {
     totals += norm(o, 3);
   }
   printf("%f\n", totals);
-  return (0);
+  return 0;
 }
