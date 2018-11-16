@@ -19,3 +19,11 @@ rustlib:
 	ls -lh rustlib.o
 	LD_LIBRARY_PATH=. /usr/bin/time ./rustlib.o
 	rm rustlib.o librustlinalg.so
+
+cpplib:
+	g++ -shared -o libclinalg.so clinalg.h -O3 -Wall
+	ls -lh libclinalg.so
+	g++ withlib.cpp -o clib.o -Llibclinalg -lm -O3 -Wall
+	ls -lh clib.o
+	/usr/bin/time ./clib.o
+	rm clib.o libclinalg.so
