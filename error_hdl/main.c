@@ -19,30 +19,33 @@ int main() {
   int read_tm_errno;
   double read_tm_storage[num_tms];
 
-  read_tm1(&read_tm_errno, read_tm_storage, cur_stor_pos++);
+  read_tm1(&read_tm_errno, read_tm_storage, cur_stor_pos);
 
   if (read_tm_errno == NO_ERROR) {
-    printf("TM #1: no error -- value = %f\n", read_tm_storage);
+    printf("TM #1: no error -- value = %f\n", read_tm_storage[cur_stor_pos]);
   } else {
     printf("TM #1: errored -- no value to report\n");
   }
+  cur_stor_pos++;
 
   read_tm2(&read_tm_errno, read_tm_storage, cur_stor_pos++);
 
   if (read_tm_errno == NO_ERROR) {
-    printf("TM #2: no error -- value = %f\n", read_tm_storage);
+    printf("TM #2: no error -- value = %f\n", read_tm_storage[cur_stor_pos]);
   } else {
     printf("TM #2: errored -- no value to report\n");
   }
+  cur_stor_pos++;
 
   // At this point, nothing prevents a programmer from coding some logic based
-  // on the value of telemetry reading, even if it has failed. This nseemingly
+  // on the value of telemetry reading, even if it has failed. This seemingly
   // minor error may have drastic consequences.
 
   // For example:
-  printf("To recap, all telemetry to be downlinked includes:");
-  while (cur_stor_pos >= 0) {
-    printf("TM #%d = %f", cur_stor_pos, read_tm_storage[--cur_stor_pos]);
+  printf("\nTo recap, all telemetry to be downlinked includes:\n");
+  while (cur_stor_pos > 1) {
+    // Will eventually use an uninitialized value.
+    printf("TM #%d = %f\n", cur_stor_pos, read_tm_storage[--cur_stor_pos]);
   }
 
   return 0;
