@@ -1,5 +1,5 @@
 c:
-	gcc main.c -o main.o -lm
+	gcc main.c -o main.o -lm -Wall
 	./main.o
 	rm main.o
 

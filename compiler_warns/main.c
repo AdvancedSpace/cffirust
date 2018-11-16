@@ -37,7 +37,7 @@ int main() {
   subv(invec1, invec2, outvec, 3);
   this_norm = norm(outvec, 3);
 
-  printf("%d %d\n", &(invec1[2]), &(invec2[0]));
+  printf("%p\n%p\n", &(invec1[2]), &(invec2[0]));
   printf("%f\n", this_norm);
   return 0;
 }
