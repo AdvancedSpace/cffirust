@@ -27,3 +27,12 @@ cpplib:
 	ls -lh clib.o
 	/usr/bin/time ./clib.o
 	rm clib.o libclinalg.so
+
+cpprust:
+	rustc rustlinalg.rs --crate-type=cdylib -C opt-level=3
+	ls -lh librustlinalg.so
+	# g++ withlib.cpp -o clib.o -Llibclinalg -lm -O3 -Wall -D USE_RUST_LIB
+	g++ withlib.cpp -o clib.o -L. -lrustlinalg -O3 -D USE_RUST_LIB
+	ls -lh clib.o
+	LD_LIBRARY_PATH=. /usr/bin/time ./clib.o
+	rm clib.o librustlinalg.so

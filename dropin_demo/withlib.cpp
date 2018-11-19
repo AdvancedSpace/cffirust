@@ -1,10 +1,11 @@
-// #include <cstdlib>
 #include <iostream>
 #include <random>
-// #include <ctime>
 
+#ifdef USE_RUST_LIB
+#include "rustlinalg.h"
+#else
 #include "clinalg.h"
-
+#endif
 
 int main() {
   std::random_device rd;
