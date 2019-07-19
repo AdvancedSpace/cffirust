@@ -1,5 +1,6 @@
-#include <iostream>
-#include <random>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #ifdef USE_RUST_LIB
 #include "rustlinalg.h"
@@ -8,9 +9,8 @@
 #endif
 
 int main() {
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_real_distribution<> dis(-2.0e-16, 2e16);
+  time_t t;
+  srand((unsigned)time(&t));
 
   /*
     Generate 2 vectors of size 3, compute the norm of their difference,
@@ -19,12 +19,12 @@ int main() {
   uint i;
   double totals = 0; // Avoids optimizing out the loop.
   for (i = 0; i < 5e7; i++) {
-    double a[] = {dis(gen), dis(gen), dis(gen)};
-    double b[] = {dis(gen), dis(gen), dis(gen)};
+    double a[] = {2.0, 5.0, 6.0};
+    double b[] = {3.0, 4.0, 7.0};
     double o[] = {0, 0, 0};
     subv(a, b, o, 3);
     totals += norm(o, 3);
   }
-  std::cout << totals << std::endl;
+  printf("%f\n", totals);
   return 0;
 }
